@@ -1,6 +1,6 @@
 const SelectCoin = ({ coins, selectedCoin, handleChange }) => {
   return (
-    <div className="border-solid border-4 border-indigo-800 shadow-lg my-2">
+    <div className="bg-gray-100 border-solid border-2 border-gray-200 rounded-lg shadow-lg my-2">
       <div>
         <h2>Select a coin</h2>
       </div>

@@ -23,7 +23,7 @@ const App = () => {
   };
 
   return (
-    <div className="container mx-auto px-8">
+    <div className="container max-w-5xl mx-auto px-8">
       {coins ? (
         <div>
           <div>
