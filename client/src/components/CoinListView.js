@@ -45,7 +45,7 @@ const CoinListView = ({ coins, selectedCoin }) => {
             <div className="flex-1 max-w-xl">
               <div className="flex flex-row my-14 mx-8 flex-wrap content-start justify-between">
                 <div className="flex">
-                  <img className="w-12" src={coin.logo_url} alt="" />
+                  <img className="w-12" style={{ height: "52px" }} src={coin.logo_url} alt="" />
                   <div className="mx-6">
                     <div>{coin.id}</div>
                     <div className="text-lg font-semibold">{coin.name}</div>

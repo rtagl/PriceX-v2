@@ -10,9 +10,13 @@ const App = () => {
   const [selectedCoin, setSelectedCoin] = useState(null);
 
   useEffect(() => {
-    axios.get(url).then((response) => {
-      setCoins(response.data.slice(0, 21));
-    });
+    async function fetchMyAPI() {
+      let response = await axios.get(url);
+      await setCoins(response.data.slice(0, 21));
+      await setSelectedCoin(response.data[Math.floor(Math.random() * (10 - 1) + 1)]);
+    }
+
+    fetchMyAPI();
   }, []);
 
   console.log(selectedCoin);
