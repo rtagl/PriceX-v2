@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 const CoinListView = ({ coins, selectedCoin }) => {
   const coinValueAtX = (coin, selectedCoin) => {
     const coinMC = Number(coin.market_cap);
@@ -37,6 +39,21 @@ const CoinListView = ({ coins, selectedCoin }) => {
     return num;
   };
 
+  useEffect(() => {
+    const changeUpsideColor = () => {
+      const values = document.querySelectorAll(".upside");
+      values.forEach((value) => {
+        if (Number(value.innerText.substring(0, value.innerText.length - 1)) < 0) {
+          value.style.color = "red";
+        } else {
+          value.style.color = "green";
+        }
+      });
+    };
+
+    changeUpsideColor();
+  });
+
   return (
     <div>
       {coins.map((coin) => (
@@ -55,18 +72,18 @@ const CoinListView = ({ coins, selectedCoin }) => {
               </div>
             </div>
             {selectedCoin ? (
-              <div className="flex flex-col mx-2 my-6">
+              <div className="flex flex-col mx-2 my-7" style={{ width: "18rem" }}>
                 <div className="flex flex-row justify-between">
-                  <div className="px-12">Current Price</div>
-                  <div className="px-12">${Number(selectedCoin.price).toFixed(2)}</div>
+                  <div className="">Current Price</div>
+                  <div className="">${Number(selectedCoin.price).toFixed(2)}</div>
                 </div>
                 <div className="flex flex-row justify-between my-4">
-                  <div className="px-12">Potential Price</div>
-                  <div className="px-12">${coinValueAtX(coin, selectedCoin)}</div>
+                  <div className="">Potential Price</div>
+                  <div className="">${coinValueAtX(coin, selectedCoin)}</div>
                 </div>
                 <div className="flex flex-row justify-between">
-                  <div className="px-12">Potential Upside</div>
-                  <div className="px-12 font-semibold">{potentialUpside(coin, selectedCoin)}</div>
+                  <div className="">Potential Upside</div>
+                  <div className="font-semibold upside">{potentialUpside(coin, selectedCoin)}</div>
                 </div>
               </div>
             ) : (
