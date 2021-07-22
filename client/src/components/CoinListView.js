@@ -79,7 +79,7 @@ const CoinListView = ({ coins, selectedCoin }) => {
                 </div>
                 <div className="flex flex-row justify-between my-4">
                   <div className="">Potential Price</div>
-                  <div className="">${coinValueAtX(coin, selectedCoin)}</div>
+                  <div className="font-semibold">${coinValueAtX(coin, selectedCoin)}</div>
                 </div>
                 <div className="flex flex-row justify-between">
                   <div className="">Potential Upside</div>

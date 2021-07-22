@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SelectCoin from "./components/SelectCoin";
 import CoinListView from "./components/CoinListView";
+import Quote from "./components/Quote";
 import axios from "axios";
 
 const url = `https://api.nomics.com/v1/currencies/ticker?key=${process.env.REACT_APP_NOMIC_KEY}`;
@@ -28,10 +29,13 @@ const App = () => {
 
   return (
     <div className="container max-w-5xl mx-auto px-8">
-      {coins ? (
+      {coins && selectedCoin ? (
         <div>
           <div>
             <SelectCoin coins={coins} selectedCoin={selectedCoin} handleChange={handleSelectChange} />
+          </div>
+          <div>
+            <Quote selectedCoin={selectedCoin} />
           </div>
           <div>
             <CoinListView coins={coins} selectedCoin={selectedCoin} />
