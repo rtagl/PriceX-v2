@@ -6,17 +6,26 @@ const CoinListView = ({ coins, selectedCoin }) => {
     const selectedCoinMC = Number(selectedCoin.market_cap);
     const selectedCoinPrice = Number(selectedCoin.price);
     const potentialPrice = (coinMC / selectedCoinMC) * selectedCoinPrice;
+    const formattedPotentialPrice = potentialPrice.toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+      style: "currency",
+      currency: "USD",
+    });
 
-    return potentialPrice.toFixed(2);
+    console.log(typeof formattedPotentialPrice, formattedPotentialPrice);
+    return formattedPotentialPrice;
   };
 
   const potentialUpside = (coin, selectedCoin) => {
-    const potentialPrice = coinValueAtX(coin, selectedCoin);
+    const coinMC = Number(coin.market_cap);
+    const selectedCoinMC = Number(selectedCoin.market_cap);
     const selectedCoinPrice = Number(selectedCoin.price);
+    const potentialPrice = (coinMC / selectedCoinMC) * selectedCoinPrice;
     const multiplier = (potentialPrice - selectedCoinPrice) / selectedCoin.price;
 
     if (multiplier < 10) {
-      return (multiplier * 100).toFixed(2) + "%";
+      return Math.round(multiplier * 100).toFixed(2) + "%";
     } else {
       return Math.round(multiplier) + "x";
     }
@@ -57,38 +66,48 @@ const CoinListView = ({ coins, selectedCoin }) => {
   return (
     <div>
       {coins.map((coin) => (
-        <div key={coin.id} className="bg-gray-100 border-solid border-2 border-gray-200 rounded-lg shadow-lg my-6">
-          <div className="flex justify-between">
-            <div className="flex-1 max-w-xl">
-              <div className="flex flex-row my-14 mx-8 flex-wrap content-start justify-between">
-                <div className="flex">
-                  <img className="w-12" style={{ height: "52px" }} src={coin.logo_url} alt="" />
-                  <div className="mx-6">
-                    <div>{coin.id}</div>
-                    <div className="text-lg font-semibold">{coin.name}</div>
-                  </div>
-                </div>
-                <div className="py-2 mx-8 text-3xl font-semibold">{"$" + nFormatter(coin.market_cap)}</div>
+        <div key={coin.id} className="flex border-solid border-2 border-gray-200 rounded-lg shadow-lg my-6">
+          <div className="flex flex-row w-1/2 justify-between bg-gray-100">
+            <div className="flex flex-wrap content-around">
+              <img className="w-12" style={{ height: "52px" }} src={coin.logo_url} alt="" />
+              <div className="">
+                <div className="text-gray-500 font-semibold">{coin.id}</div>
+                <div className="text-lg font-semibold">{coin.name}</div>
               </div>
             </div>
-            {selectedCoin ? (
-              <div className="flex flex-col mx-2 my-7" style={{ width: "18rem" }}>
-                <div className="flex flex-row justify-between">
-                  <div className="">Current Price</div>
-                  <div className="">${Number(selectedCoin.price).toFixed(2)}</div>
-                </div>
-                <div className="flex flex-row justify-between my-4">
-                  <div className="">Potential Price</div>
-                  <div className="font-semibold">${coinValueAtX(coin, selectedCoin)}</div>
-                </div>
-                <div className="flex flex-row justify-between">
-                  <div className="">Potential Upside</div>
-                  <div className="font-semibold upside">{potentialUpside(coin, selectedCoin)}</div>
+            <div className="text-3xl font-semibold">{"$" + nFormatter(coin.market_cap)}</div>
+          </div>
+          <div className="flex flex-row w-1/2 justify-between">
+            <div className="flex flex-wrap content-center m-auto">
+              <div className="">
+                <img className="w-11" style={{ height: "44" }} src={selectedCoin.logo_url} alt="" />
+              </div>
+              <div>
+                <div className="text-sm text-gray-500">{selectedCoin.id}</div>
+                <div className="font-semibold">{selectedCoin.name}</div>
+              </div>
+            </div>
+            <div className="flex flex-col w-1/2">
+              <div className="flex flex-row justify-between">
+                <div className="text-gray-500 text-sm">Current {selectedCoin.id} Price</div>
+                <div className="font-proxima">
+                  {Number(selectedCoin.price).toLocaleString("en-US", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                    style: "currency",
+                    currency: "USD",
+                  })}
                 </div>
               </div>
-            ) : (
-              <div>hello</div>
-            )}
+              <div className="flex flex-row justify-between">
+                <div className="text-gray-500 text-sm">Potential Price</div>
+                <div className="font-semibold font-proxima">{coinValueAtX(coin, selectedCoin)}</div>
+              </div>
+              <div className="flex flex-row justify-between">
+                <div className="text-gray-500 text-sm">Potential Upside</div>
+                <div className="font-semibold upside font-proxima">{potentialUpside(coin, selectedCoin)}</div>
+              </div>
+            </div>
           </div>
         </div>
       ))}

@@ -32,6 +32,11 @@ const App = () => {
       {coins && selectedCoin ? (
         <div>
           <div>
+            <div className="md:text-3xl sm:text-2xl font-semibold text-center">
+              Helping you put {selectedCoin.name} in perspective
+            </div>
+          </div>
+          <div>
             <SelectCoin coins={coins} selectedCoin={selectedCoin} handleChange={handleSelectChange} />
           </div>
           <div>
