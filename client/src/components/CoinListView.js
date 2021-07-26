@@ -13,7 +13,6 @@ const CoinListView = ({ coins, selectedCoin }) => {
       currency: "USD",
     });
 
-    console.log(typeof formattedPotentialPrice, formattedPotentialPrice);
     return formattedPotentialPrice;
   };
 
@@ -66,28 +65,44 @@ const CoinListView = ({ coins, selectedCoin }) => {
   return (
     <div>
       {coins.map((coin) => (
-        <div key={coin.id} className="flex border-solid border-2 border-gray-200 rounded-lg shadow-lg my-6">
-          <div className="flex flex-row w-1/2 justify-between bg-gray-100">
-            <div className="flex flex-wrap content-around">
-              <img className="w-12" style={{ height: "52px" }} src={coin.logo_url} alt="" />
-              <div className="">
-                <div className="text-gray-500 font-semibold">{coin.id}</div>
-                <div className="text-lg font-semibold">{coin.name}</div>
+        <div key={coin.id} className="flex border-solid border-2 border-gray-200 rounded-lg shadow-lg mb-6">
+          <div className="flex flex-row lg:w-1/2 justify-between p-4">
+            <div className="flex">
+              <div className="flex justify-center items-center">
+                <div className="text-3xl text-gray-500 p-3 w-12">{coin.rank}</div>
+              </div>
+              <div className="flex justify-center items-center p-3">
+                <img className="w-10" style={{ height: "40px" }} src={coin.logo_url} alt="" />
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <div>
+                  <div className="text-gray-500 font-semibold">{coin.id}</div>
+                  <div className="text-lg font-semibold">{coin.name}</div>
+                </div>
               </div>
             </div>
-            <div className="text-3xl font-semibold">{"$" + nFormatter(coin.market_cap)}</div>
+            <div className="text-3xl font-semibold m-5 flex justify-center items-center">
+              <div>{"$" + nFormatter(coin.market_cap)}</div>
+            </div>
           </div>
-          <div className="flex flex-row w-1/2 justify-between">
-            <div className="flex flex-wrap content-center m-auto">
-              <div className="">
-                <img className="w-11" style={{ height: "44" }} src={selectedCoin.logo_url} alt="" />
-              </div>
-              <div>
-                <div className="text-sm text-gray-500">{selectedCoin.id}</div>
-                <div className="font-semibold">{selectedCoin.name}</div>
+
+          {/* Coin comparison half */}
+
+          <div className="flex lg:w-1/2 flex-row p-4 justify-between bg-gray-50">
+            <div className="flex justify-center items-center w-1/3">
+              <div className="flex flex-row">
+                <div className="p-2">
+                  <img style={{ height: "38px" }} src={selectedCoin.logo_url} alt="" />
+                </div>
+                <div className="flex justify-center items-center flex-col">
+                  <div>
+                    <div className="text-sm text-gray-500">{selectedCoin.id}</div>
+                    <div className="font-semibold">{selectedCoin.name}</div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="flex flex-col w-1/2">
+            <div className="flex flex-col w-3/5">
               <div className="flex flex-row justify-between">
                 <div className="text-gray-500 text-sm">Current {selectedCoin.id} Price</div>
                 <div className="font-proxima">
@@ -99,7 +114,7 @@ const CoinListView = ({ coins, selectedCoin }) => {
                   })}
                 </div>
               </div>
-              <div className="flex flex-row justify-between">
+              <div className="flex flex-row justify-between py-2">
                 <div className="text-gray-500 text-sm">Potential Price</div>
                 <div className="font-semibold font-proxima">{coinValueAtX(coin, selectedCoin)}</div>
               </div>
