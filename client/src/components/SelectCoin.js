@@ -1,6 +1,6 @@
 const SelectCoin = ({ coins, selectedCoin, handleChange }) => {
   return (
-    <div className="bg-gray-100 border-solid border-2 border-gray-200 rounded-lg shadow-lg my-6">
+    <div className="bg-gray-50 border-solid border-2 border-gray-200 rounded-lg shadow-lg my-6">
       <div className="flex justify-center">
         <div className="m-2">
           <img className="w-8" style={{ height: "32px" }} src={selectedCoin.logo_url} alt="" />

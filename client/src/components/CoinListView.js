@@ -65,14 +65,16 @@ const CoinListView = ({ coins, selectedCoin }) => {
   return (
     <div>
       {coins.map((coin) => (
-        <div key={coin.id} className="flex border-solid border-2 border-gray-200 rounded-lg shadow-lg mb-6">
-          <div className="flex flex-row lg:w-1/2 justify-between p-4">
+        <div
+          key={coin.id}
+          className="flex flex-col md:flex-row border-solid border-2 border-gray-200 rounded-lg shadow-lg mb-6">
+          <div className="flex flex-1 flex-row justify-between p-4">
             <div className="flex">
               <div className="flex justify-center items-center">
                 <div className="text-3xl text-gray-500 p-3 w-12">{coin.rank}</div>
               </div>
-              <div className="flex justify-center items-center p-3">
-                <img className="w-10" style={{ height: "40px" }} src={coin.logo_url} alt="" />
+              <div className="flex justify-center items-center w-16">
+                <img style={{ height: "40px" }} src={coin.logo_url} alt="" />
               </div>
               <div className="flex flex-col justify-center items-center">
                 <div>
@@ -88,9 +90,9 @@ const CoinListView = ({ coins, selectedCoin }) => {
 
           {/* Coin comparison half */}
 
-          <div className="flex lg:w-1/2 flex-row p-4 justify-between bg-gray-50">
-            <div className="flex justify-center items-center w-1/3">
-              <div className="flex flex-row">
+          <div className="flex flex-1 flex-row p-4 justify-between bg-gray-50">
+            <div className="flex justify-center items-center">
+              <div className="flex flex-row flex-1">
                 <div className="p-2">
                   <img style={{ height: "38px" }} src={selectedCoin.logo_url} alt="" />
                 </div>
@@ -102,9 +104,9 @@ const CoinListView = ({ coins, selectedCoin }) => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col w-3/5">
+            <div className="flex flex-col">
               <div className="flex flex-row justify-between">
-                <div className="text-gray-500 text-sm">Current {selectedCoin.id} Price</div>
+                <div className="text-gray-500 text-sm mr-12">Current {selectedCoin.id} Price</div>
                 <div className="font-proxima">
                   {Number(selectedCoin.price).toLocaleString("en-US", {
                     minimumFractionDigits: 2,
@@ -115,11 +117,11 @@ const CoinListView = ({ coins, selectedCoin }) => {
                 </div>
               </div>
               <div className="flex flex-row justify-between py-2">
-                <div className="text-gray-500 text-sm">Potential Price</div>
+                <div className="text-gray-500 text-sm mr-2">Potential Price</div>
                 <div className="font-semibold font-proxima">{coinValueAtX(coin, selectedCoin)}</div>
               </div>
               <div className="flex flex-row justify-between">
-                <div className="text-gray-500 text-sm">Potential Upside</div>
+                <div className="text-gray-500 text-sm mr-2">Potential Upside</div>
                 <div className="font-semibold upside font-proxima">{potentialUpside(coin, selectedCoin)}</div>
               </div>
             </div>
