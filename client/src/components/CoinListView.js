@@ -71,7 +71,7 @@ const CoinListView = ({ coins, selectedCoin }) => {
           <div className="flex flex-1 flex-row justify-between p-4">
             <div className="flex">
               <div className="flex justify-center items-center">
-                <div className="text-3xl text-gray-500 p-3 w-12">{coin.rank}</div>
+                <div className=" text-2xl md:text-3xl text-gray-500 p-3 w-12">{coin.rank}</div>
               </div>
               <div className="flex justify-center items-center w-16">
                 <img style={{ height: "40px" }} src={coin.logo_url} alt="" />
@@ -83,15 +83,15 @@ const CoinListView = ({ coins, selectedCoin }) => {
                 </div>
               </div>
             </div>
-            <div className="text-3xl font-semibold m-5 flex justify-center items-center">
+            <div className="text-2xl sm:text-3xl font-semibold m-5 flex justify-center items-center">
               <div>{"$" + nFormatter(coin.market_cap)}</div>
             </div>
           </div>
 
           {/* Coin comparison half */}
 
-          <div className="flex flex-1 flex-row p-4 justify-between bg-gray-50">
-            <div className="flex justify-center items-center">
+          <div className="flex flex-1 flex-row pl-8 pr-8 pt-4 pb-4 md:p-4 justify-between bg-gray-50">
+            <div className="md:flex md:justify-center md:items-center hidden md:mr-8">
               <div className="flex flex-row flex-1">
                 <div className="p-2">
                   <img style={{ height: "38px" }} src={selectedCoin.logo_url} alt="" />
@@ -104,7 +104,8 @@ const CoinListView = ({ coins, selectedCoin }) => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col">
+
+            <div className="flex flex-col flex-1">
               <div className="flex flex-row justify-between">
                 <div className="text-gray-500 text-sm mr-12">Current {selectedCoin.id} Price</div>
                 <div className="font-proxima">
